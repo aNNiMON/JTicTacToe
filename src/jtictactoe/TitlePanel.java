@@ -1,13 +1,19 @@
 package jtictactoe;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -16,18 +22,18 @@ import javax.swing.JPanel;
  * @author aNNiMON
  */
 public class TitlePanel extends JPanel {
+    
+    private final BufferedImage exitImage, exitImageBW;
+    private final BufferedImage minimizeImage, minimizeImageBW;
+    private final BufferedImage background;
+    private final JFrame mainFrame;
+    private final Font messageFont, infoFont;
 
     private boolean moveForm;
-    private BufferedImage exitImage, exitImageBW;
-    private BufferedImage minimizeImage, minimizeImageBW;
-    private BufferedImage background;
     private Point clickedStart;
-    private final JFrame mainFrame;
-    private Font messageFont, infoFont;
     
     private int winX, winO;
     private String message;
-    
     
     public TitlePanel(JFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -75,121 +81,101 @@ public class TitlePanel extends JPanel {
             g.drawString(message, x, 110);
         }
     }
-
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
-
-        exitButton = new javax.swing.JButton();
-        minimizeButton = new javax.swing.JButton();
-
-        setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(480, 150));
-        addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+        setBackground(new Color(51, 51, 51));
+        setPreferredSize(new Dimension(480, 150));
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent evt) {
                 formMousePressed(evt);
             }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+            @Override
+            public void mouseReleased(MouseEvent evt) {
                 formMouseReleased(evt);
             }
         });
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
+        addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent evt) {
                 formMouseDragged(evt);
             }
         });
         setLayout(null);
+        
 
-        exitButton.setIcon(new javax.swing.ImageIcon(exitImageBW));
+        final JButton exitButton = new JButton();
+        exitButton.setIcon(new ImageIcon(exitImageBW));
         exitButton.setBorder(null);
         exitButton.setBorderPainted(false);
         exitButton.setContentAreaFilled(false);
-        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                exitButtonMouseEntered(evt);
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                exitButton.setIcon(new ImageIcon(exitImage));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                exitButtonMouseExited(evt);
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                exitButton.setIcon(new ImageIcon(exitImageBW));
             }
         });
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
                 exitButtonActionPerformed(evt);
             }
         });
         add(exitButton);
         exitButton.setBounds(378, 2, 100, 50);
 
-        minimizeButton.setIcon(new javax.swing.ImageIcon(minimizeImageBW));
+        final JButton minimizeButton = new JButton();
+        minimizeButton.setIcon(new ImageIcon(minimizeImageBW));
         minimizeButton.setBorder(null);
         minimizeButton.setBorderPainted(false);
         minimizeButton.setContentAreaFilled(false);
-        minimizeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                minimizeButtonMouseEntered(evt);
+        minimizeButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent evt) {
+                minimizeButton.setIcon(new ImageIcon(minimizeImage));
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                minimizeButtonMouseExited(evt);
+            @Override
+            public void mouseExited(MouseEvent evt) {
+                minimizeButton.setIcon(new ImageIcon(minimizeImageBW));
             }
         });
-        minimizeButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                minimizeButtonActionPerformed(evt);
+        minimizeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                mainFrame.setState(Frame.ICONIFIED);
             }
         });
         add(minimizeButton);
         minimizeButton.setBounds(2, 2, 100, 50);
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+    }
+    
+    private void exitButtonActionPerformed(ActionEvent evt) {            
         mainFrame.setVisible(false);
         mainFrame.dispose();
         System.exit(0);
-    }//GEN-LAST:event_exitButtonActionPerformed
+    }
 
-    private void minimizeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_minimizeButtonActionPerformed
-        mainFrame.setState(Frame.ICONIFIED);
-    }//GEN-LAST:event_minimizeButtonActionPerformed
-
-    private void exitButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseEntered
-        exitButton.setIcon(new ImageIcon(exitImage));
-    }//GEN-LAST:event_exitButtonMouseEntered
-
-    private void exitButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseExited
-        exitButton.setIcon(new ImageIcon(exitImageBW));
-    }//GEN-LAST:event_exitButtonMouseExited
-
-    private void minimizeButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseEntered
-        minimizeButton.setIcon(new ImageIcon(minimizeImage));
-    }//GEN-LAST:event_minimizeButtonMouseEntered
-
-    private void minimizeButtonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeButtonMouseExited
-        minimizeButton.setIcon(new ImageIcon(minimizeImageBW));
-    }//GEN-LAST:event_minimizeButtonMouseExited
-
-    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+    private void formMousePressed(MouseEvent evt) {   
         if (evt.getButton() == MouseEvent.BUTTON1) {
             moveForm = true;
             clickedStart = evt.getPoint();
         }
-    }//GEN-LAST:event_formMousePressed
+    }
 
-    private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
+    private void formMouseReleased(MouseEvent evt) {    
         moveForm = false;
-    }//GEN-LAST:event_formMouseReleased
+    }
 
-    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+    private void formMouseDragged(MouseEvent evt) {   
         if (moveForm) {
             Point moved = evt.getLocationOnScreen();
             moved.translate(-clickedStart.x, -clickedStart.y);
             mainFrame.setLocation(moved);
         }
-    }//GEN-LAST:event_formMouseDragged
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton exitButton;
-    private javax.swing.JButton minimizeButton;
-    // End of variables declaration//GEN-END:variables
-
+    }
     
 }
