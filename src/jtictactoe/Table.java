@@ -15,10 +15,10 @@ public class Table {
             MODE_STRIKE_DIAGONAL = 0x10,
             MODE_STRIKE_DIAGONAL_REVERSE = 0x20;
 
-    private boolean nextMoveIsX;
-    private Figure[][] table;
-    private Random random;
+    private final Figure[][] table;
+    private final Random random;
     private int strikedMode;
+    private boolean nextMoveIsX;
     
     public Table() {
         table = new Figure[3][3];
@@ -84,7 +84,7 @@ public class Table {
             { table[0][0], table[1][1], table[2][2] },
             { table[0][2], table[1][1], table[2][0] }
         };
-        char[] maybeWinnerArray = new char[array.length];
+        final char[] maybeWinnerArray = new char[array.length];
         // Calculate winning situations for computer (zeroes).
         for (int i = 0; i < array.length; i++) {
             Figure[] figures = array[i];
@@ -171,7 +171,7 @@ public class Table {
     
     private boolean isWinnerCombo(Figure f1, Figure f2, Figure f3) {
         if (f1.isEmpty()) return false;
-        char figure = f1.getFigure();
+        final char figure = f1.getFigure();
         return ( (figure == f2.getFigure()) &&
                  (figure == f3.getFigure()) );
     }

@@ -18,9 +18,9 @@ public class GameBoard extends JPanel {
     
     private BufferedImage strikedHor, strikedVer, strikedDiag, strikedDiagRev;
     private BufferedImage background, figureX, figureO;
-    private Table table;
-    private TitlePanel title;
-    private int imgWidth, imgHeight;
+    private final Table table;
+    private final TitlePanel title;
+    private final int imgWidth, imgHeight;
 
     public GameBoard(TitlePanel title) {
         this.title = title;
@@ -47,10 +47,10 @@ public class GameBoard extends JPanel {
     }
     
     private void drawTable(Graphics g) {
-        Figure[][] figures = table.getFiguresArray();
+        final Figure[][] figures = table.getFiguresArray();
         for (int i = 0; i < figures.length; i++) {
             for (int j = 0; j < figures[0].length; j++) {
-                char figure = figures[i][j].getFigure();
+                final char figure = figures[i][j].getFigure();
                 if (figure != Figure.EMPTY) {
                     BufferedImage image = ( (figure == Figure.X) ? figureX : figureO );
                     int x = j * CELL_SIZE + OFFSET + (CELL_SIZE - image.getWidth()) / 2;
@@ -62,11 +62,11 @@ public class GameBoard extends JPanel {
     }
 
     private void drawStrike(Graphics g) {
-        int strikeMode = table.getStrikedMode();
+        final int strikeMode = table.getStrikedMode();
         if (strikeMode != Table.MODE_NOT_STRIKED) {
             final int strikedSize = strikedHor.getHeight();
-            int coord = OFFSET + (CELL_SIZE - strikedSize) / 2;
-            int strikePos = strikeMode & 0x03;
+            final int coord = OFFSET + (CELL_SIZE - strikedSize) / 2;
+            final int strikePos = strikeMode & 0x03;
             
             if ( (strikeMode & Table.MODE_STRIKE_DIAGONAL) != 0 ) {
                 g.drawImage(strikedDiag, coord, coord, null);
@@ -81,16 +81,16 @@ public class GameBoard extends JPanel {
     }
     
     private void gameBoardMousePressed(MouseEvent evt) {
-        Point id = convertToID( evt.getPoint() );
+        final Point id = convertToID( evt.getPoint() );
         //table.computerMove();
         table.setFigure(id.x, id.y);
         
         if (table.getStrikedMode() == Table.MODE_NOT_STRIKED) title.setMessage("");
         
         if (!table.hasMoreMoves()) {
-            char winner = table.checkWinner();
+            final char winner = table.checkWinner();
             if (winner != Figure.EMPTY) {
-                int winX = (winner == Figure.X) ? 1 : 0;
+                final int winX = (winner == Figure.X) ? 1 : 0;
                 title.updateWin(winX, 1 - winX);
                 title.setMessage(winner + " is win");
             } else title.setMessage("Drow");

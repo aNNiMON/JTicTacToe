@@ -23,7 +23,7 @@ public class Main extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout(0, 0));
         
-        TitlePanel title = new TitlePanel(this);
+        final TitlePanel title = new TitlePanel(this);
         add(title, BorderLayout.NORTH);
         add(new GameBoard(title));
         
