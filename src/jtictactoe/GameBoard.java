@@ -13,6 +13,7 @@ import javax.swing.JPanel;
  * @author aNNiMON
  */
 public class GameBoard extends JPanel {
+    
     private static final int CELL_SIZE = 150;
     private static final int OFFSET = 15;
     

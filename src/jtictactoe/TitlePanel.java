@@ -102,7 +102,6 @@ public class TitlePanel extends JPanel {
             }
         });
         setLayout(null);
-        
 
         final JButton exitButton = new JButton();
         exitButton.setIcon(new ImageIcon(exitImageBW));
@@ -177,5 +176,4 @@ public class TitlePanel extends JPanel {
             mainFrame.setLocation(moved);
         }
     }
-    
 }

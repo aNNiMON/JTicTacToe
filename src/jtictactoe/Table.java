@@ -44,7 +44,7 @@ public class Table {
     }
     
     public void setFigure(int x, int y) {
-        if( (checkWinner() != Figure.EMPTY) || (!hasMoreMoves()) ) {
+        if ( (checkWinner() != Figure.EMPTY) || (!hasMoreMoves()) ) {
             resetTable();
             return;
         }
@@ -59,7 +59,7 @@ public class Table {
     }
     
     public void computerMove() {
-        if( (checkWinner() != Figure.EMPTY) || (!hasMoreMoves()) ) {
+        if ( (checkWinner() != Figure.EMPTY) || (!hasMoreMoves()) ) {
             //resetTable();
             return;
         }
@@ -105,14 +105,14 @@ public class Table {
         
         // Trying to put figure to the center.
         int x = 1, y = 1;
-        if(!table[y][x].isEmpty() || (random.nextInt(5) <= 3) ) {
+        if (!table[y][x].isEmpty() || (random.nextInt(5) <= 3) ) {
             // If it's busy, put to the corners.
             int count = 0;
             do {
                 x = random.nextBoolean() ? 0 : 2;
                 y = random.nextBoolean() ? 0 : 2;
                 count++;
-            } while ( (!table[y][x].isEmpty()) && (count < 10));
+            } while ( (!table[y][x].isEmpty()) && (count < 10) );
             
             if (count > 9) {
                 // Put to the remaining cells.
@@ -122,7 +122,7 @@ public class Table {
                     x = pair[random.nextInt(pair.length)][0];
                     y = pair[random.nextInt(pair.length)][1];
                     count++;
-                } while ( (!table[y][x].isEmpty()) && (count < 10));
+                } while ( (!table[y][x].isEmpty()) && (count < 10) );
             }
         }
         table[y][x].setFigure(nextMoveIsX ? Figure.X : Figure.O);
