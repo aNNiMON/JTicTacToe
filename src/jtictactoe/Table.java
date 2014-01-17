@@ -14,6 +14,8 @@ public class Table {
             MODE_STRIKE_VERTICAL = 0x08,
             MODE_STRIKE_DIAGONAL = 0x10,
             MODE_STRIKE_DIAGONAL_REVERSE = 0x20;
+    
+    private static final int TABLE_SIZE = 3;
 
     private final Figure[][] table;
     private final Random random;
@@ -21,13 +23,13 @@ public class Table {
     private boolean nextMoveIsX;
     
     public Table() {
-        table = new Figure[3][3];
+        table = new Figure[TABLE_SIZE][TABLE_SIZE];
         random = new Random();
     }
 
     public void resetTable() {
-        for (int i = 0; i < table.length; i++) {
-            for (int j = 0; j < table[0].length; j++) {
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            for (int j = 0; j < TABLE_SIZE; j++) {
                 table[i][j] = new Figure();
             }
         }
@@ -49,8 +51,8 @@ public class Table {
             return;
         }
         
-        boolean xIsNorm = ( (0 <= x) && (x < 3) );
-        boolean yIsNorm = ( (0 <= y) && (y < 3) );
+        boolean xIsNorm = ( (0 <= x) && (x < TABLE_SIZE) );
+        boolean yIsNorm = ( (0 <= y) && (y < TABLE_SIZE) );
         if (xIsNorm && yIsNorm && table[y][x].isEmpty()) {
             table[y][x].setFigure(nextMoveIsX ? Figure.X : Figure.O);
             nextMoveIsX = !nextMoveIsX;
@@ -130,14 +132,14 @@ public class Table {
     
     public char checkWinner() {
         // Horizontal check
-        for (int y = 0; y < 3; y++) {
+        for (int y = 0; y < TABLE_SIZE; y++) {
             if (isWinnerCombo(table[y][0], table[y][1], table[y][2])) {
                 strikedMode = MODE_STRIKE_HORIZONTAL | y;
                 return table[y][0].getFigure();
             }
         }
         // Vertical check
-        for (int x = 0; x < 3; x++) {
+        for (int x = 0; x < TABLE_SIZE; x++) {
             if (isWinnerCombo(table[0][x], table[1][x], table[2][x])) {
                 strikedMode = MODE_STRIKE_VERTICAL | x;
                 return table[0][x].getFigure();
